@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Formation vidéos IA — BENEFICE_MOTION-TEXTE_HOOK-15MIN</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "InterDisplay";
+        src: url("assets/fonts/InterDisplay-Black.otf") format("opentype");
+        font-weight: 900;
+      }
+      @font-face {
+        font-family: "InterText";
+        src: url("assets/fonts/Inter-SemiBold.otf") format("opentype");
+        font-weight: 600;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #07080a;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: radial-gradient(120% 70% at 50% 35%, #15171c 0%, #07080a 70%);
+        font-family: "InterText", sans-serif;
+        color: #f5f5f4;
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+      .stack {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 48px;
+        padding: 0 80px;
+        text-align: center;
+      }
+      .display {
+        font-family: "InterDisplay", sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 0.98;
+        text-transform: uppercase;
+      }
+      .green {
+        color: #0a0a0a;
+        background: #b6ff3b;
+        padding: 6px 26px 14px;
+        border-radius: 18px;
+        display: inline-block;
+      }
+
+      /* Scène 1 — hook 15 min */
+      #s1-l1 {
+        font-size: 90px;
+      }
+      #s1-big {
+        font-size: 300px;
+        color: #b6ff3b;
+        line-height: 0.9;
+      }
+      #s1-l3 {
+        font-size: 64px;
+        color: #e7e5e4;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .mini-phone {
+        width: 54px;
+        height: 92px;
+        border: 8px solid #b6ff3b;
+        border-radius: 14px;
+      }
+
+      /* Scène 2 — sans tournage / matériel / abonnement */
+      .nope-list {
+        display: flex;
+        flex-direction: column;
+        gap: 56px;
+        align-items: center;
+      }
+      .nope {
+        position: relative;
+        font-size: 120px;
+        color: #f5f5f4;
+      }
+      .nope-strike {
+        position: absolute;
+        left: -30px;
+        right: -30px;
+        top: 50%;
+        height: 18px;
+        margin-top: -9px;
+        background: #ff3b3b;
+        border-radius: 9px;
+        transform-origin: left center;
+      }
+      #s2-label {
+        font-size: 56px;
+        color: #a8a29e;
+      }
+
+      /* Scène 3 — formation pas à pas */
+      #s3-title {
+        font-size: 80px;
+      }
+      .steps {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        width: 880px;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 34px;
+        background: #16181d;
+        border: 3px solid #2a2d34;
+        border-radius: 28px;
+        padding: 30px 40px;
+        font-size: 60px;
+        text-align: left;
+      }
+      .num {
+        flex: 0 0 auto;
+        width: 96px;
+        height: 96px;
+        border-radius: 50%;
+        background: #2d6bff;
+        color: #fff;
+        font-family: "InterDisplay", sans-serif;
+        font-weight: 900;
+        font-size: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Scène 4 — pour quel produit */
+      #s4-title {
+        font-size: 84px;
+      }
+      .tags {
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        align-items: center;
+      }
+      .tag {
+        font-family: "InterDisplay", sans-serif;
+        font-weight: 900;
+        font-size: 76px;
+        text-transform: uppercase;
+        letter-spacing: -0.02em;
+        padding: 22px 54px 30px;
+        border-radius: 999px;
+        border: 6px solid #b6ff3b;
+        color: #b6ff3b;
+      }
+
+      /* Scène 5 — CTA */
+      #s5-banner {
+        width: 980px;
+        border-radius: 28px;
+        display: block;
+      }
+      #s5-price {
+        font-size: 190px;
+        color: #b6ff3b;
+      }
+      #s5-cta {
+        font-family: "InterDisplay", sans-serif;
+        font-weight: 900;
+        font-size: 64px;
+        color: #0a0a0a;
+        background: #ffd400;
+        border-radius: 999px;
+        padding: 30px 70px 38px;
+      }
+      #s5-note {
+        position: absolute;
+        bottom: 70px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 30px;
+        color: #78716c;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="18.8"
+      data-width="1080"
+      data-height="1920"
+    >
+      <audio id="voiceover" src="assets/voiceover.wav" data-start="0" data-duration="18.8" data-track-index="9"></audio>
+
+      <!-- Scène 1 : HOOK — « Ta prochaine pub vidéo ? 15 minutes » -->
+      <section id="s1" class="clip" data-start="0" data-duration="3.85" data-track-index="0">
+        <div class="stack" style="gap: 40px">
+          <div id="s1-l1" class="display">Ta prochaine pub vidéo&nbsp;?</div>
+          <div id="s1-big" class="display">15 min</div>
+          <div id="s1-l3"><span class="mini-phone"></span><span>depuis ton téléphone</span></div>
+        </div>
+      </section>
+
+      <!-- Scène 2 : sans tournage, matériel, abonnement -->
+      <section id="s2" class="clip" data-start="3.85" data-duration="3.25" data-track-index="0">
+        <div class="stack" style="gap: 70px">
+          <div id="s2-label">Pas besoin de&nbsp;:</div>
+          <div class="nope-list">
+            <div id="s2-n1" class="nope display">Tournage<span id="s2-x1" class="nope-strike"></span></div>
+            <div id="s2-n2" class="nope display">Matériel<span id="s2-x2" class="nope-strike"></span></div>
+            <div id="s2-n3" class="nope display">Abonnement<span id="s2-x3" class="nope-strike"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scène 3 : étape par étape -->
+      <section id="s3" class="clip" data-start="7.1" data-duration="4.45" data-track-index="0">
+        <div class="stack" style="gap: 64px">
+          <div id="s3-title" class="display">Étape par étape <span class="green">avec l'IA</span></div>
+          <div class="steps">
+            <div id="s3-st1" class="step"><span class="num">1</span><span>Tu écris ton prompt</span></div>
+            <div id="s3-st2" class="step"><span class="num">2</span><span>L'IA crée ta vidéo</span></div>
+            <div id="s3-st3" class="step"><span class="num">3</span><span>Tu publies</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scène 4 : pour quel produit -->
+      <section id="s4" class="clip" data-start="11.55" data-duration="3.45" data-track-index="0">
+        <div class="stack" style="gap: 70px">
+          <div id="s4-title" class="display">Pour vendre</div>
+          <div class="tags">
+            <div id="s4-t1" class="tag">Produit physique</div>
+            <div id="s4-t2" class="tag">Produit digital</div>
+            <div id="s4-t3" class="tag">Service</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scène 5 : prix + appel à l'action -->
+      <section id="s5" class="clip" data-start="15" data-duration="3.8" data-track-index="0">
+        <div class="stack" style="gap: 56px">
+          <img id="s5-banner" src="assets/banner.png" alt="" />
+          <div id="s5-price" class="display">6 000 F</div>
+          <div id="s5-cta">Clique sur le lien</div>
+        </div>
+        <div id="s5-note">Lien affilié</div>
+      </section>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Scène 1
+      tl.fromTo("#s1-l1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.15);
+      tl.fromTo("#s1-big", { opacity: 0, scale: 0.4 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 1.45);
+      tl.fromTo("#s1-l3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 2.4);
+      tl.to("#s1 .stack", { opacity: 0, duration: 0.2 }, 3.65);
+
+      // Scène 2
+      tl.fromTo("#s2-label", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 3.9);
+      tl.fromTo("#s2-n1", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 4.0);
+      tl.fromTo("#s2-x1", { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, 4.45);
+      tl.fromTo("#s2-n2", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 4.85);
+      tl.fromTo("#s2-x2", { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, 5.3);
+      tl.fromTo("#s2-n3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.3, ease: "power3.out" }, 5.75);
+      tl.fromTo("#s2-x3", { scaleX: 0 }, { scaleX: 1, duration: 0.25, ease: "power2.out" }, 6.3);
+      tl.to("#s2 .stack", { opacity: 0, duration: 0.2 }, 6.9);
+
+      // Scène 3
+      tl.fromTo("#s3-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 7.2);
+      tl.fromTo("#s3-st1", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 8.4);
+      tl.fromTo("#s3-st2", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 9.2);
+      tl.fromTo("#s3-st3", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 10.0);
+      tl.to("#s3 .stack", { opacity: 0, duration: 0.2 }, 11.35);
+
+      // Scène 4
+      tl.fromTo("#s4-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 11.6);
+      tl.fromTo("#s4-t1", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 12.3);
+      tl.fromTo("#s4-t2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 13.2);
+      tl.fromTo("#s4-t3", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.35, ease: "back.out(2)" }, 14.0);
+      tl.to("#s4 .stack", { opacity: 0, duration: 0.2 }, 14.8);
+
+      // Scène 5
+      tl.fromTo("#s5-banner", { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 15.05);
+      tl.fromTo("#s5-price", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 15.3);
+      tl.fromTo("#s5-cta", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 16.4);
+      tl.to("#s5-cta", { scale: 1.07, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 3 }, 16.9);
+      tl.fromTo("#s5-note", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 15.5);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>

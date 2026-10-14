@@ -24,3 +24,4 @@ Prix affiché : 6 000 F (10,38 $US).
 | Fichier | Angle | Format | Concept | Hook |
 |---|---|---|---|---|
 | `PROBLEME_MOTION-TEXTE_HOOK-INFLUENCEUR_v1.mp4` | Problème : coût influenceur | Motion design + voix off | Texte animé + mockup téléphone + checklist | « Payer un influenceur pour 1 vidéo ? » |
+| `BENEFICE_MOTION-TEXTE_HOOK-15MIN_v1.mp4` | Bénéfice : pub en 15 min depuis le téléphone | Motion design + voix off | Texte animé + éléments barrés + étapes 1-2-3 | « Ta prochaine pub vidéo ? 15 min » |
