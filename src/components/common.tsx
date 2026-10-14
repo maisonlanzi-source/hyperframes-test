@@ -231,30 +231,63 @@ export const Flag: React.FC<{country: 'france' | 'canada'; height?: number}> = (
 	);
 };
 
-/** Carte arrondie bleue avec drapeau et nom du pays. */
+/** Vignette photo arrondie, avec un lent zoom. */
+export const PhotoThumb: React.FC<{src: string; delay: number}> = ({src, delay}) => {
+	const frame = useCurrentFrame();
+	const p = useSpring(delay + 6, 26);
+	const zoom = 1.12 - 0.08 * Math.min(1, Math.max(0, (frame - delay) / 150));
+	return (
+		<div
+			style={{
+				width: 180,
+				height: 240,
+				borderRadius: 24,
+				overflow: 'hidden',
+				flexShrink: 0,
+				alignSelf: 'center',
+				border: `4px solid ${COLORS.night}`,
+				boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
+				opacity: p,
+				transform: `scale(${0.85 + 0.15 * p})`,
+			}}
+		>
+			<Img
+				src={staticFile(src)}
+				style={{width: '100%', height: '100%', objectFit: 'cover', transform: `scale(${zoom})`}}
+			/>
+		</div>
+	);
+};
+
+/** Carte arrondie bleue avec drapeau, nom du pays et vignette photo facultative. */
 export const CountryCard: React.FC<{
 	country: 'france' | 'canada';
 	style?: React.CSSProperties;
 	children?: React.ReactNode;
-	headerRight?: React.ReactNode;
-}> = ({country, style, children, headerRight}) => (
+	photo?: React.ReactNode;
+}> = ({country, style, children, photo}) => (
 	<div
 		style={{
 			backgroundColor: COLORS.blue,
 			borderRadius: 32,
-			padding: '32px 40px 36px',
+			padding: photo ? '28px 28px 28px 40px' : '32px 40px 36px',
 			boxShadow: '0 12px 32px rgba(0,0,0,0.18)',
+			display: 'flex',
+			alignItems: 'center',
+			gap: 28,
 			...style,
 		}}
 	>
-		<div style={{display: 'flex', alignItems: 'center', gap: 18}}>
-			<Flag country={country} height={40} />
-			<div style={{...TYPE.text, color: COLORS.lightBlue}}>
-				{country === 'france' ? 'France' : 'Canada'}
+		<div style={{flex: 1, minWidth: 0}}>
+			<div style={{display: 'flex', alignItems: 'center', gap: 18}}>
+				<Flag country={country} height={40} />
+				<div style={{...TYPE.text, color: COLORS.lightBlue}}>
+					{country === 'france' ? 'France' : 'Canada'}
+				</div>
 			</div>
-			{headerRight}
+			{children ? <div style={{marginTop: 16}}>{children}</div> : null}
 		</div>
-		{children ? <div style={{marginTop: 16}}>{children}</div> : null}
+		{photo}
 	</div>
 );
 

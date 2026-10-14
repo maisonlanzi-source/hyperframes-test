@@ -4,6 +4,8 @@ import {Compare} from '../components/Compare';
 
 export const Scene4AfterDegree: React.FC = () => (
 	<Compare
+		francePhoto="photos/campus.jpg"
+		canadaPhoto="photos/bibliotheque.jpg"
 		beats={BEATS.afterDegree}
 		title={`2.${NB}Et après le diplôme${NB}?`}
 		france="Un titre de séjour pour chercher un emploi, selon le diplôme"

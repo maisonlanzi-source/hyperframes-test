@@ -138,6 +138,7 @@ const CircledDate: React.FC<{children: string}> = ({children}) => {
 
 export const Scene6Deadline: React.FC = () => (
 	<Compare
+		canadaPhoto="photos/embarquement.jpg"
 		beats={BEATS.deadline}
 		title={`4.${NB}Quand déposer le dossier${NB}?`}
 		franceAside={<Calendar />}

@@ -4,6 +4,8 @@ import {Compare} from '../components/Compare';
 
 export const Scene5Language: React.FC = () => (
 	<Compare
+		francePhoto="photos/amphitheatre.jpg"
+		canadaPhoto="photos/hublot.jpg"
 		beats={BEATS.language}
 		title={`3.${NB}Dans quelle langue${NB}?`}
 		france="Tout en français"
