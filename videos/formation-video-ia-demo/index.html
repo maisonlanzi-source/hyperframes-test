@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="fr" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>Formation vidéos IA — démo PROBLEME_MOTION_TEXTE_HOOK-INFLUENCEUR</title>
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+    <style>
+      @font-face {
+        font-family: "InterDisplay";
+        src: url("assets/fonts/InterDisplay-Black.otf") format("opentype");
+        font-weight: 900;
+      }
+      @font-face {
+        font-family: "InterText";
+        src: url("assets/fonts/Inter-SemiBold.otf") format("opentype");
+        font-weight: 600;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: #07080a;
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: radial-gradient(120% 70% at 50% 35%, #15171c 0%, #07080a 70%);
+        font-family: "InterText", sans-serif;
+        color: #f5f5f4;
+      }
+      .clip {
+        position: absolute;
+        inset: 0;
+      }
+      .stack {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 48px;
+        padding: 0 80px;
+        text-align: center;
+      }
+      .display {
+        font-family: "InterDisplay", sans-serif;
+        font-weight: 900;
+        letter-spacing: -0.03em;
+        line-height: 0.98;
+        text-transform: uppercase;
+      }
+      .kicker {
+        font-size: 52px;
+        color: #a8a29e;
+      }
+      .green {
+        color: #0a0a0a;
+        background: #b6ff3b;
+        padding: 6px 26px 14px;
+        border-radius: 18px;
+        display: inline-block;
+      }
+      .blue {
+        color: #ffffff;
+        background: #2d6bff;
+        padding: 6px 26px 14px;
+        border-radius: 18px;
+        display: inline-block;
+      }
+
+      /* Scène 1 — hook */
+      #s1-line1 {
+        font-size: 96px;
+      }
+      #s1-line2 {
+        font-size: 150px;
+      }
+      #s1-stamp {
+        font-size: 92px;
+        color: #ff3b3b;
+        border: 12px solid #ff3b3b;
+        border-radius: 24px;
+        padding: 12px 40px 22px;
+      }
+
+      /* Scène 2 — phone */
+      #s2-title {
+        font-size: 84px;
+      }
+      .phone {
+        position: relative;
+        width: 520px;
+        height: 940px;
+        border-radius: 70px;
+        border: 14px solid #d6b56d;
+        background: #000;
+        overflow: hidden;
+        box-shadow: 0 0 120px rgba(255, 176, 46, 0.25);
+      }
+      .phone img {
+        position: absolute;
+        height: 912px;
+        top: 0;
+        left: -1530px;
+      }
+      #s2-sub {
+        font-size: 50px;
+        color: #e7e5e4;
+        max-width: 880px;
+        line-height: 1.2;
+      }
+
+      /* Scène 3 — solution */
+      #s3-l1 {
+        font-size: 96px;
+      }
+      #s3-l2 {
+        font-size: 170px;
+      }
+      #s3-l3 {
+        font-size: 64px;
+        color: #e7e5e4;
+        display: flex;
+        align-items: center;
+        gap: 24px;
+      }
+      .mini-phone {
+        width: 54px;
+        height: 92px;
+        border: 8px solid #b6ff3b;
+        border-radius: 14px;
+      }
+
+      /* Scène 4 — checklist */
+      #s4-title {
+        font-size: 88px;
+      }
+      .check-list {
+        display: flex;
+        flex-direction: column;
+        gap: 36px;
+        width: 900px;
+      }
+      .check {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+        background: #16181d;
+        border: 3px solid #2a2d34;
+        border-radius: 28px;
+        padding: 34px 40px;
+        font-size: 58px;
+        text-align: left;
+      }
+      .tick {
+        flex: 0 0 auto;
+        width: 84px;
+        height: 84px;
+        border-radius: 50%;
+        background: #b6ff3b;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .tick svg {
+        width: 50px;
+        height: 50px;
+      }
+
+      /* Scène 5 — CTA */
+      #s5-banner {
+        width: 980px;
+        border-radius: 28px;
+        display: block;
+      }
+      #s5-price {
+        font-size: 190px;
+        color: #b6ff3b;
+      }
+      #s5-cta {
+        font-family: "InterDisplay", sans-serif;
+        font-weight: 900;
+        font-size: 64px;
+        color: #0a0a0a;
+        background: #ffd400;
+        border-radius: 999px;
+        padding: 30px 70px 38px;
+      }
+      #s5-note {
+        position: absolute;
+        bottom: 70px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font-size: 30px;
+        color: #78716c;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="main"
+      data-start="0"
+      data-duration="21.3"
+      data-width="1080"
+      data-height="1920"
+    >
+      <audio id="voiceover" src="assets/voiceover.wav" data-start="0" data-duration="21.3" data-track-index="9"></audio>
+
+      <!-- Scène 1 : HOOK — « Payer un influenceur pour UNE vidéo ? » -->
+      <section id="s1" class="clip" data-start="0" data-duration="3.8" data-track-index="0">
+        <div class="stack">
+          <div id="s1-line1" class="display">Payer un influenceur</div>
+          <div id="s1-line2" class="display"><span class="blue">pour 1 vidéo ?</span></div>
+          <div id="s1-stamp" class="display">Trop cher</div>
+        </div>
+      </section>
+
+      <!-- Scène 2 : ce qui fait vendre -->
+      <section id="s2" class="clip" data-start="3.8" data-duration="4.7" data-track-index="0">
+        <div class="stack" style="gap: 40px">
+          <div id="s2-title" class="display">Ce qui fait vendre&nbsp;:</div>
+          <div id="s2-phone" class="phone"><img id="s2-img" src="assets/banner.png" alt="" /></div>
+          <div id="s2-sub">Une vidéo où quelqu'un présente ton produit</div>
+        </div>
+      </section>
+
+      <!-- Scène 3 : la solution -->
+      <section id="s3" class="clip" data-start="8.5" data-duration="4.4" data-track-index="0">
+        <div class="stack">
+          <div id="s3-l1" class="display">Crée ces vidéos</div>
+          <div id="s3-l2" class="display"><span class="green">avec l'IA</span></div>
+          <div id="s3-l3"><span class="mini-phone"></span><span>depuis ton téléphone</span></div>
+        </div>
+      </section>
+
+      <!-- Scène 4 : ce qui est inclus -->
+      <section id="s4" class="clip" data-start="12.9" data-duration="4.6" data-track-index="0">
+        <div class="stack" style="gap: 64px">
+          <div id="s4-title" class="display">Dans la formation</div>
+          <div class="check-list">
+            <div id="s4-c1" class="check">
+              <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+              <span>Outils gratuits</span>
+            </div>
+            <div id="s4-c2" class="check">
+              <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+              <span>+300 prompts prêts à l'emploi</span>
+            </div>
+            <div id="s4-c3" class="check">
+              <span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="#0a0a0a" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5" /></svg></span>
+              <span>Une communauté pour t'aider</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Scène 5 : prix + appel à l'action -->
+      <section id="s5" class="clip" data-start="17.5" data-duration="3.8" data-track-index="0">
+        <div class="stack" style="gap: 56px">
+          <img id="s5-banner" src="assets/banner.png" alt="" />
+          <div id="s5-price" class="display">6 000 F</div>
+          <div id="s5-cta">Clique sur le lien</div>
+        </div>
+        <div id="s5-note">Lien affilié</div>
+      </section>
+    </div>
+    <script>
+      const tl = gsap.timeline({ paused: true });
+
+      // Scène 1
+      tl.fromTo("#s1-line1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 0.15);
+      tl.fromTo("#s1-line2", { opacity: 0, scale: 0.7 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(1.8)" }, 0.6);
+      tl.fromTo("#s1-stamp", { opacity: 0, scale: 2.2, rotation: -14 }, { opacity: 1, scale: 1, rotation: -8, duration: 0.35, ease: "power4.in" }, 2.35);
+      tl.to("#s1 .stack", { opacity: 0, duration: 0.2 }, 3.6);
+
+      // Scène 2
+      tl.fromTo("#s2-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 3.9);
+      tl.fromTo("#s2-phone", { opacity: 0, y: 160 }, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out" }, 4.1);
+      tl.fromTo("#s2-img", { x: 0 }, { x: -350, duration: 4.2, ease: "none" }, 4.2);
+      tl.fromTo("#s2-sub", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 5.4);
+      tl.to("#s2 .stack", { opacity: 0, duration: 0.2 }, 8.3);
+
+      // Scène 3
+      tl.fromTo("#s3-l1", { opacity: 0, y: 40 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 8.6);
+      tl.fromTo("#s3-l2", { opacity: 0, scale: 0.6 }, { opacity: 1, scale: 1, duration: 0.5, ease: "back.out(2)" }, 9.5);
+      tl.fromTo("#s3-l3", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 10.8);
+      tl.to("#s3 .stack", { opacity: 0, duration: 0.2 }, 12.7);
+
+      // Scène 4
+      tl.fromTo("#s4-title", { opacity: 0, y: 30 }, { opacity: 1, y: 0, duration: 0.35, ease: "power3.out" }, 12.95);
+      tl.fromTo("#s4-c1", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 13.1);
+      tl.fromTo("#s4-c2", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 14.2);
+      tl.fromTo("#s4-c3", { opacity: 0, x: -120 }, { opacity: 1, x: 0, duration: 0.4, ease: "power3.out" }, 15.9);
+      tl.to("#s4 .stack", { opacity: 0, duration: 0.2 }, 17.3);
+
+      // Scène 5
+      tl.fromTo("#s5-banner", { opacity: 0, y: -80 }, { opacity: 1, y: 0, duration: 0.5, ease: "power3.out" }, 17.55);
+      tl.fromTo("#s5-price", { opacity: 0, scale: 0.5 }, { opacity: 1, scale: 1, duration: 0.45, ease: "back.out(2)" }, 17.8);
+      tl.fromTo("#s5-cta", { opacity: 0, y: 60 }, { opacity: 1, y: 0, duration: 0.4, ease: "power3.out" }, 18.9);
+      tl.to("#s5-cta", { scale: 1.07, duration: 0.35, ease: "sine.inOut", yoyo: true, repeat: 3 }, 19.4);
+      tl.fromTo("#s5-note", { opacity: 0 }, { opacity: 1, duration: 0.3 }, 18.0);
+
+      window.__timelines["main"] = tl;
+    </script>
+  </body>
+</html>
