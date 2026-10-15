@@ -1,4 +1,67 @@
 {
-	"voice": {},
-	"music": null
+	"scenes": {
+		"hook": 4,
+		"promise": 3.5,
+		"budget": 7.6,
+		"afterDegree": 6.7,
+		"language": 6.4,
+		"deadline": 5.7,
+		"summary": 6.9,
+		"cta": 12.2
+	},
+	"voice": {
+		"hook": {
+			"src": "audio/voix-1-hook.mp3",
+			"from": 6,
+			"durationInFrames": 108
+		},
+		"promise": {
+			"src": "audio/voix-2-promise.mp3",
+			"from": 126,
+			"durationInFrames": 92
+		},
+		"budget": {
+			"src": "audio/voix-3-budget.mp3",
+			"from": 231,
+			"durationInFrames": 218
+		},
+		"afterDegree": {
+			"src": "audio/voix-4-afterDegree.mp3",
+			"from": 459,
+			"durationInFrames": 189
+		},
+		"language": {
+			"src": "audio/voix-5-language.mp3",
+			"from": 660,
+			"durationInFrames": 182
+		},
+		"deadline": {
+			"src": "audio/voix-6-deadline.mp3",
+			"from": 852,
+			"durationInFrames": 158
+		},
+		"summary": {
+			"src": "audio/voix-7-summary.mp3",
+			"from": 1023,
+			"durationInFrames": 196
+		},
+		"cta": {
+			"src": "audio/voix-8-cta.mp3",
+			"from": 1230,
+			"durationInFrames": 315
+		}
+	},
+	"music": {
+		"src": "audio/musique.mp3",
+		"volume": 0.22
+	},
+	"sfx": {
+		"whoosh": "audio/sfx-whoosh.mp3",
+		"pop": "audio/sfx-pop.mp3",
+		"tick": "audio/sfx-tick.mp3",
+		"page": "audio/sfx-page.mp3",
+		"marker": "audio/sfx-marker.mp3",
+		"impact": "audio/sfx-impact.mp3",
+		"chime": "audio/sfx-chime.mp3"
+	}
 }

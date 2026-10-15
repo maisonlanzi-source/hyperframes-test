@@ -16,44 +16,40 @@ import {execFileSync} from 'node:child_process';
 const API = 'https://api.elevenlabs.io/v1';
 const FPS = 30;
 
-// Début et durée de chaque scène, en secondes (voir src/constants.ts).
-// Texte : version resserrée de voix-off.txt, calibrée pour 43 s.
+// Durée minimale de chaque scène, en secondes (le temps de ses animations).
+// Une scène s'allonge si sa phrase ne tient pas : le script écrit les durées
+// finales dans le manifeste, que src/constants.ts relit.
+// Texte : version resserrée de voix-off.txt.
 const SCENES = [
-	{key: 'hook', start: 0, duration: 4, text: 'Votre enfant a le bac cette année ? France ou Canada ?'},
-	{key: 'promise', start: 4, duration: 3, text: 'Voici comment choisir, en quatre questions.'},
+	{key: 'hook', duration: 4, text: 'Votre enfant a le bac cette année ? France ou Canada ?'},
+	{key: 'promise', duration: 3, text: 'Voici comment choisir, en quatre questions.'},
 	{
 		key: 'budget',
-		start: 7,
 		duration: 7,
 		text: 'Un : le budget. Six à huit millions de francs CFA en France, seize à vingt-quatre au Canada.',
 	},
 	{
 		key: 'afterDegree',
-		start: 14,
 		duration: 6,
 		text: "Deux : l'après-diplôme. Le Canada ouvre un chemin plus clair vers le travail et la résidence.",
 	},
 	{
 		key: 'language',
-		start: 20,
 		duration: 5,
 		text: 'Trois : la langue. Français en France ; surtout anglais au Canada, sauf au Québec.',
 	},
 	{
 		key: 'deadline',
-		start: 25,
 		duration: 5,
 		text: 'Quatre : le calendrier. En France, dossier de Licence 1 avant le 15 décembre.',
 	},
 	{
 		key: 'summary',
-		start: 30,
 		duration: 5,
 		text: 'En résumé : moins de huit millions, la France. Seize millions et plus, le Canada.',
 	},
 	{
 		key: 'cta',
-		start: 35,
 		duration: 8,
 		text: 'Procédure, preuve de fonds, lettre, entretien : tout est dans le guide. Neuf mille neuf cents francs CFA. Appuyez sur le bouton sous la vidéo.',
 	},
@@ -62,8 +58,10 @@ const SCENES = [
 // Décalage de la voix après le début de la scène, et marge avant la fin.
 const LEAD_IN = 0.2;
 const TAIL = 0.15;
-// Accélération maximale tolérée si une phrase déborde de sa scène.
-const MAX_SPEED = 1.15;
+// Accélération maximale tolérée avant d'allonger la scène.
+const MAX_SPEED = 1.08;
+// Temps laissé sur l'image finale après la dernière phrase.
+const END_HOLD = 1.5;
 
 // Avec un « secret réseau », la vraie clé n'est jamais visible dans la session :
 // le proxy l'insère dans les requêtes vers api.elevenlabs.io. La variable peut
@@ -133,12 +131,16 @@ const synth = async (i, speed) => {
 	return file;
 };
 
-const manifest = {voice: {}, music: null};
+const manifest = {scenes: {}, voice: {}, music: null, sfx: {}};
 const previous = 'src/audio-manifest.json';
 if (fs.existsSync(previous)) {
-	manifest.music = JSON.parse(fs.readFileSync(previous, 'utf8')).music ?? null;
+	const old = JSON.parse(fs.readFileSync(previous, 'utf8'));
+	manifest.music = old.music ?? null;
+	manifest.sfx = old.sfx ?? {};
 }
 
+manifest.scenes = {};
+let start = 0;
 for (let i = 0; i < SCENES.length; i++) {
 	const s = SCENES[i];
 	const max = s.duration - LEAD_IN - TAIL;
@@ -150,17 +152,22 @@ for (let i = 0; i < SCENES.length; i++) {
 		file = await synth(i, speed);
 		d = duration(file);
 	}
-	const fits = d <= max;
+	const tail = i === SCENES.length - 1 ? END_HOLD : TAIL;
+	const sceneDuration = Math.max(s.duration, Math.ceil((LEAD_IN + d + tail) * 10) / 10);
 	console.log(
-		`${fits ? 'ok ' : '⚠  '} scène ${i + 1} : ${d.toFixed(2)} s / ${max.toFixed(2)} s disponibles` +
-			(speed !== 1 ? ` (vitesse ${speed})` : ''),
+		`scène ${i + 1} : voix ${d.toFixed(2)} s, scène ${sceneDuration} s` +
+			(sceneDuration > s.duration ? ` (allongée de ${(sceneDuration - s.duration).toFixed(1)} s)` : '') +
+			(speed !== 1 ? `, vitesse ${speed}` : ''),
 	);
+	manifest.scenes[s.key] = sceneDuration;
 	manifest.voice[s.key] = {
 		src: `audio/${path.basename(file)}`,
-		from: Math.round((s.start + LEAD_IN) * FPS),
+		from: Math.round((start + LEAD_IN) * FPS),
 		durationInFrames: Math.ceil(d * FPS),
 	};
+	start += sceneDuration;
 }
+console.log(`\nDurée totale : ${start.toFixed(1)} s`);
 
 fs.writeFileSync(previous, JSON.stringify(manifest, null, '\t') + '\n');
 console.log(`\nManifeste écrit : ${previous}. Relancez le rendu : npm run render`);

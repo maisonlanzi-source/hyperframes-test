@@ -2,6 +2,8 @@
 // Les minutages sont en images (30 images/s). Les « beats » d'une scène
 // sont relatifs au début de cette scène.
 
+import manifest from './audio-manifest.json';
+
 export const FPS = 30;
 const s = (seconds: number) => Math.round(seconds * FPS);
 
@@ -58,19 +60,34 @@ export const LAYOUTS: Record<Format, Layout> = {
 	},
 };
 
-// Découpage des scènes (début et durée, en images).
-export const SCENES = {
-	hook: {from: s(0), duration: s(4)}, // 0:00 – 0:04
-	promise: {from: s(4), duration: s(3)}, // 0:04 – 0:07
-	budget: {from: s(7), duration: s(7)}, // 0:07 – 0:14
-	afterDegree: {from: s(14), duration: s(6)}, // 0:14 – 0:20
-	language: {from: s(20), duration: s(5)}, // 0:20 – 0:25
-	deadline: {from: s(25), duration: s(5)}, // 0:25 – 0:30
-	summary: {from: s(30), duration: s(5)}, // 0:30 – 0:35
-	cta: {from: s(35), duration: s(8)}, // 0:35 – 0:43
-} as const;
+// Durée minimale de chaque scène, en secondes. Si la voix off a été générée,
+// src/audio-manifest.json donne les durées allongées pour que chaque phrase tienne.
+const MIN_SECONDS = {
+	hook: 4,
+	promise: 3,
+	budget: 7,
+	afterDegree: 6,
+	language: 5,
+	deadline: 5,
+	summary: 5,
+	cta: 8,
+};
+type SceneKey = keyof typeof MIN_SECONDS;
+const fromManifest = (manifest as {scenes?: Partial<Record<SceneKey, number>>}).scenes ?? {};
 
-export const TOTAL_DURATION = s(43);
+// Découpage des scènes (début et durée, en images).
+export const SCENES = (() => {
+	let from = 0;
+	const out = {} as Record<SceneKey, {from: number; duration: number}>;
+	for (const key of Object.keys(MIN_SECONDS) as SceneKey[]) {
+		const duration = s(Math.max(MIN_SECONDS[key], fromManifest[key] ?? 0));
+		out[key] = {from, duration};
+		from += duration;
+	}
+	return out;
+})();
+
+export const TOTAL_DURATION = SCENES.cta.from + SCENES.cta.duration;
 
 // Durée du fondu de sortie de chaque scène.
 export const SCENE_FADE_OUT = 8;
@@ -80,8 +97,8 @@ export const LOGO_IN = SCENES.promise.from + 6;
 
 // Les cercles du fond et les flottements ralentissent puis s'arrêtent
 // ici, pour que l'image finale reste fixe plus de 2 secondes.
-export const FREEZE_START = s(38);
-export const FREEZE_LENGTH = s(2.6); // immobile à partir de 40,6 s
+export const FREEZE_START = TOTAL_DURATION - s(5);
+export const FREEZE_LENGTH = s(2.6); // immobile 2,4 s avant la fin
 
 // Beats internes de chaque scène (images, relatifs au début de la scène).
 export const BEATS = {
