@@ -6,7 +6,7 @@
 //   npm run voix                      génère les 8 fichiers de voix
 //
 // Variables d'environnement :
-//   ELEVENLABS_API_KEY   (obligatoire) clé API, à définir dans les réglages de l'environnement
+//   ELEVENLABS_API_KEY   clé API, en « secret réseau » dans les réglages de l'environnement
 //   ELEVENLABS_VOICE_ID  (obligatoire pour générer) id de la voix choisie
 //   ELEVENLABS_MODEL_ID  (facultatif) modèle, par défaut eleven_multilingual_v2
 import fs from 'node:fs';
@@ -65,19 +65,21 @@ const TAIL = 0.15;
 // Accélération maximale tolérée si une phrase déborde de sa scène.
 const MAX_SPEED = 1.15;
 
-const key = process.env.ELEVENLABS_API_KEY;
-if (!key) {
-	console.error(
-		"ELEVENLABS_API_KEY n'est pas définie. Ajoutez-la dans les réglages de l'environnement, puis ouvrez une nouvelle session.",
-	);
-	process.exit(1);
-}
+// Avec un « secret réseau », la vraie clé n'est jamais visible dans la session :
+// le proxy l'insère dans les requêtes vers api.elevenlabs.io. La variable peut
+// donc être absente ou contenir une valeur de substitution.
+const key = process.env.ELEVENLABS_API_KEY || 'proxy-injected';
 
 const api = async (url, init = {}) => {
 	const res = await fetch(`${API}${url}`, {
 		...init,
 		headers: {'xi-api-key': key, 'Content-Type': 'application/json', ...init.headers},
 	});
+	if (res.status === 401) {
+		throw new Error(
+			"ElevenLabs refuse la clé (401). Vérifiez le secret ELEVENLABS_API_KEY (domaine api.elevenlabs.io) et ouvrez une nouvelle session.",
+		);
+	}
 	if (!res.ok) {
 		throw new Error(`ElevenLabs ${res.status} : ${await res.text()}`);
 	}
