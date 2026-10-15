@@ -36,7 +36,7 @@ npm run render        # les deux vidéos
    bruitages (transitions, pops, coches, page, feutre, impact d'ouverture, carillon final).
    `-- --music` ou `-- --sfx` pour n'en refaire qu'une partie. Le placement des bruitages
    et le volume de la musique (qui baisse sous la voix) sont dans `src/components/Soundtrack.tsx`.
-5. `npm run render`.
+5. `npm run render` : rend les deux vidéos puis met le son à -14 LUFS (`npm run normaliser`).
 
 Manifeste vide = vidéo muette.
 
