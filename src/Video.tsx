@@ -10,6 +10,7 @@ import {Scene5Language} from './scenes/Scene5Language';
 import {Scene6Deadline} from './scenes/Scene6Deadline';
 import {Scene7Summary} from './scenes/Scene7Summary';
 import {Scene8Cta} from './scenes/Scene8Cta';
+import {Soundtrack} from './components/Soundtrack';
 
 const ORDER: Array<[keyof typeof SCENES, React.FC]> = [
 	['hook', Scene1Hook],
@@ -37,6 +38,7 @@ export const FranceOuCanada: React.FC<{format: Format}> = ({format}) => (
 				);
 			})}
 			<Logo />
+			<Soundtrack />
 		</AbsoluteFill>
 	</LayoutContext.Provider>
 );

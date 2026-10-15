@@ -1,6 +1,21 @@
 VOIX OFF — « France ou Canada ? » (Cap Études)
 Durée totale : 43 s. Minutage par scène (début – fin).
 
+VERSION RESSERRÉE (utilisée pour la génération ElevenLabs, tient en 43 s)
+
+Scène 1 (0:00 – 0:04) « Votre enfant a le bac cette année ? France ou Canada ? »
+Scène 2 (0:04 – 0:07) « Voici comment choisir, en quatre questions. »
+Scène 3 (0:07 – 0:14) « Un : le budget. Six à huit millions de francs CFA en France, seize à vingt-quatre au Canada. »
+Scène 4 (0:14 – 0:20) « Deux : l'après-diplôme. Le Canada ouvre un chemin plus clair vers le travail et la résidence. »
+Scène 5 (0:20 – 0:25) « Trois : la langue. Français en France ; surtout anglais au Canada, sauf au Québec. »
+Scène 6 (0:25 – 0:30) « Quatre : le calendrier. En France, dossier de Licence 1 avant le 15 décembre. »
+Scène 7 (0:30 – 0:35) « En résumé : moins de huit millions, la France. Seize millions et plus, le Canada. »
+Scène 8 (0:35 – 0:43) « Procédure, preuve de fonds, lettre, entretien : tout est dans le guide. Neuf mille neuf cents francs CFA. Appuyez sur le bouton sous la vidéo. »
+
+--------------------------------------------------------------------------
+
+VERSION D'ORIGINE (environ 150 mots : trop longue pour 43 s à un débit naturel)
+
 Scène 1 — Accroche (0:00 – 0:04)
 « Votre enfant passe son bac cette année, et vous hésitez entre la France et le Canada ? »
 

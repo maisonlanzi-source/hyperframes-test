@@ -5,6 +5,7 @@
   "scripts": {
     "studio": "remotion studio",
     "stills": "node scripts/stills.mjs",
+    "voix": "NODE_USE_ENV_PROXY=1 node scripts/voix-elevenlabs.mjs",
     "render:9x16": "remotion render FranceOuCanada-9x16 out/cap-etudes-france-ou-canada-9x16.mp4 --codec=h264",
     "render:4x5": "remotion render FranceOuCanada-4x5 out/cap-etudes-france-ou-canada-4x5.mp4 --codec=h264",
     "render": "npm run render:9x16 && npm run render:4x5"
